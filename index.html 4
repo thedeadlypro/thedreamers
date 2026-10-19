@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🅃🄷🄴 🄳🅁🄴🄰🄼🄴🅁🅂</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-dark: #05070a;
+            --card-bg: rgba(15, 18, 28, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-purple: #8b5cf6;
+            --accent-cyan: #38bdf8;
+            --accent-pink: #ec4899;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* Animated Canvas Background */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* Ambient Pulsing Nebulas */
+        .glow-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(140px);
+            opacity: 0.25;
+            z-index: -1;
+            pointer-events: none;
+            animation: nebulaFloat 12s infinite alternate ease-in-out;
+        }
+        .glow-1 { top: -10%; left: 15%; width: 500px; height: 500px; background: var(--accent-purple); }
+        .glow-2 { bottom: -10%; right: 10%; width: 550px; height: 550px; background: #2563eb; }
+
+        @keyframes nebulaFloat {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 50px) scale(1.1); }
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            background: rgba(5, 7, 10, 0.75);
+            backdrop-filter: blur(20px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .nav-brand {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            background: linear-gradient(135deg, #fff, var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0 3rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .badge {
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            color: #c084fc;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 6vw, 4.2rem);
+            line-height: 1.1;
+            margin-bottom: 1.2rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan), var(--accent-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.2rem);
+            color: var(--text-muted);
+            max-width: 650px;
+            line-height: 1.6;
+            margin-bottom: 2.2rem;
+        }
+
+        /* Dynamic Hoverable Text Effects */
+        .hover-text {
+            display: inline-block;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .hover-text:hover {
+            color: #fff;
+            transform: scale(1.05);
+            text-shadow: 0 0 15px var(--accent-purple);
+        }
+
+        /* Buttons */
+        .cta-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            border: none;
+            width: auto;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: #fff;
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px -5px rgba(99, 102, 241, 0.7);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-3px);
+        }
+
+        /* Separated Perks Layout (Staggered Grid) */
+        .section-title {
+            text-align: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            margin: 4rem 0 2rem;
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 4rem;
+        }
+
+        .perk-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            padding: 2.2rem;
+            border-radius: 22px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Hover Disappear & Glow Animations */
+        .perk-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(56, 189, 248, 0.1));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .perk-card:hover::before {
+            opacity: 1;
+        }
+
+        .perk-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8);
+        }
+
+        .perk-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .perk-icon {
+            width: 55px;
+            height: 55px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1.5rem;
+        }
+
+        .perk-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .perk-card p {
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        /* Interactive Server Rules Section */
+        .rules-container {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(16px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            margin: 3rem 0;
+        }
+
+        .rule-item {
+            border-bottom: 1px solid var(--card-border);
+            padding: 1.2rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+
+        .rule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .rule-header:hover {
+            color: var(--accent-cyan);
+        }
+
+        .rule-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.3s ease;
+            color: var(--text-muted);
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .rule-item.active .rule-body {
+            max-height: 250px;
+            padding-top: 1rem;
+        }
+
+        .rule-item.active .chevron {
+            transform: rotate(180deg);
+            color: var(--accent-purple);
+        }
+
+        .chevron {
+            transition: transform 0.3s ease;
+        }
+
+        /* Interactive Owner Lanyard Widget */
+        .owner-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 4rem 0 6rem;
+        }
+
+        .lanyard-card {
+            background: rgba(15, 18, 26, 0.7);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 2rem;
+            width: 100%;
+            max-width: 480px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+        }
+
+        .lanyard-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 30px 60px -15px rgba(139, 92, 246, 0.25);
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 65px;
+            height: 65px;
+        }
+
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .status-dot {
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            border: 3px solid #0f121a;
+        }
+
+        .status-dot.online { background-color: #23a55a; }
+        .status-dot.idle { background-color: #f0b232; }
+        .status-dot.dnd { background-color: #f23f43; }
+        .status-dot.offline { background-color: #80848e; }
+
+        .profile-info h4 {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-info p {
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            margin-top: 4px;
+        }
+
+        .reveal-box {
+            margin-top: 1.2rem;
+            padding: 0.8rem 1rem;
+            background: rgba(139, 92, 246, 0.12);
+            border: 1px dashed rgba(139, 92, 246, 0.4);
+            border-radius: 12px;
+            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #c084fc;
+            transition: all 0.3s ease;
+        }
+
+        .spotify-box {
+            margin-top: 1.2rem;
+            padding: 0.9rem 1.1rem;
+            background: rgba(30, 215, 96, 0.08);
+            border: 1px solid rgba(30, 215, 96, 0.25);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .spotify-box i {
+            font-size: 1.6rem;
+            color: #1ed760;
+        }
+
+        .spotify-info .song {
+            font-weight: 700;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+
+        /* Toast Notification */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(139, 92, 246, 0.95);
+            color: #fff;
+            padding: 12px 22px;
+            border-radius: 14px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .hidden { display: none !important; }
+
+        /* Responsive Optimization */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 5%; }
+            .nav-links { display: none; }
+            .hero { padding: 3.5rem 0 2rem; }
+            .cta-group { flex-direction: column; width: 100%; }
+            .btn { width: 100%; }
+            .rules-container { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Dynamic Animated Starfield -->
+    <canvas id="starfield"></canvas>
+    <div class="glow-orb glow-1"></div>
+    <div class="glow-orb glow-2"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-brand">🅃🄷🄴 🄳🅁🄴🄰🄼🄴🅁🅂</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#perks">Perks</a></li>
+            <li><a href="#rules">Rules</a></li>
+            <li><a href="#owner">Owner</a></li>
+        </ul>
+        <a href="https://discord.gg/HmRBjExfSX" target="_blank" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.85rem;">Join Server</a>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero" id="about">
+            <div class="badge">
+                <i class="fa-solid fa-moon"></i> Late Night Hangout
+            </div>
+            <h1>Welcome To<br><span>🅃🄷🄴 🄳🅁🄴🄰🄼🄴🅁🅂</span></h1>
+            <p>
+                A place to <span class="hover-text">express yourself</span>, 
+                <span class="hover-text">chill</span>, and 
+                <span class="hover-text">build real connections</span>. 
+                The energy is always W!
+            </p>
+            <div class="cta-group">
+                <a href="https://discord.gg/HmRBjExfSX" target="_blank" class="btn btn-primary">
+                    <i class="fa-brands fa-discord"></i> Join Server
+                </a>
+                <button class="btn btn-secondary" onclick="copyInvite()">
+                    <i class="fa-regular fa-copy"></i> Copy Invite Link
+                </button>
+            </div>
+        </section>
+
+        <!-- Separated Perks Grid Section -->
+        <h2 class="section-title" id="perks">Server Perks</h2>
+        <div class="perks-grid">
+            <div class="perk-card">
+                <div class="perk-content">
+                    <div class="perk-icon"><i class="fa-solid fa-couch"></i></div>
+                    <h3>Welcoming Community</h3>
+                    <p>A relaxed, comfortable server where people actually notice when you talk.</p>
+                </div>
+            </div>
+
+            <div class="perk-card">
+                <div class="perk-content">
+                    <div class="perk-icon"><i class="fa-solid fa-heart"></i></div>
+                    <h3>Flirting & Dating Friendly</h3>
+                    <p>Dating & flirting are fine, provided everything is 100% consensual and respectful.</p>
+                </div>
+            </div>
+
+            <div class="perk-card">
+                <div class="perk-content">
+                    <div class="perk-icon"><i class="fa-solid fa-comment-dots"></i></div>
+                    <h3>Casual Swearing Allowed</h3>
+                    <p>Light swearing is totally fine—just keep it friendly and easygoing.</p>
+                </div>
+            </div>
+
+            <div class="perk-card">
+                <div class="perk-content">
+                    <div class="perk-icon"><i class="fa-solid fa-robot"></i></div>
+                    <h3>Bot & Music Channels</h3>
+                    <p>Dedicated channels for music bots, gaming bots, and fun commands.</p>
+                </div>
+            </div>
+
+            <div class="perk-card">
+                <div class="perk-content">
+                    <div class="perk-icon"><i class="fa-solid fa-shield-halved"></i></div>
+                    <h3>Reliable Moderation</h3>
+                    <p>A safe, SFW media environment kept drama-free by our friendly staff.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Official Server Rules Section -->
+        <h2 class="section-title" id="rules">📜 Server Rules</h2>
+        <div class="rules-container">
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>💥 1. Be Yourself & Be Kind</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Everyone is welcome to be who they are here.<br>
+                    • No bullying, hate speech, or drama. Treat everyone with respect.
+                </div>
+            </div>
+
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>❤️ 2. Dating is Allowed (Keep it Respectful)</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Dating and flirting are fine, but <strong>both people must be into it</strong>.<br>
+                    • Respect boundaries—if someone says "no" or seems uncomfortable, leave them alone.<br>
+                    • No creeping in DMs or sending unwanted messages.
+                </div>
+            </div>
+
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>🤬 3. Swearing is Allowed</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Swearing is totally fine here! Feel free to curse casually in chat, jokes, or while gaming.<br>
+                    • Keep it light and friendly so everyone feels comfortable.
+                </div>
+            </div>
+
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>🚫 4. Mature Chat Allowed / NO NSFW Media</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Mature topics and conversations are fine to talk about in chat.<br>
+                    • <strong>NO NSFW links, photos, videos, sexual artwork, or explicit content allowed.</strong> Keep all shared media safe for work (SFW).
+                </div>
+            </div>
+
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>🕊️ 5. Leave Solved Arguments in the Past</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Please do not bring old arguments or drama back into chat.
+                </div>
+            </div>
+
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>🤖 6. Use Bot Commands in the Right Channel</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Keep all bot commands, game bots, and music bots in designated bot channels.<br>
+                    • Do not spam bot commands in general chat.
+                </div>
+            </div>
+
+            <div class="rule-item" onclick="toggleRule(this)">
+                <div class="rule-header">
+                    <span>🛡️ 7. No Spam or Self-Promotion</span>
+                    <i class="fa-solid fa-chevron-down chevron"></i>
+                </div>
+                <div class="rule-body">
+                    • Don't spam messages, emojis, or random server pings.<br>
+                    • Advertising is only allowed if staff gives permission or inside promo channels.
+                </div>
+            </div>
+        </div>
+
+        <!-- Hoverable Owner Widget -->
+        <h2 class="section-title" id="owner">Server Owner</h2>
+        <div class="owner-wrapper">
+            <div class="lanyard-card" onclick="toggleOwnerUsername()">
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <img id="lanyard-avatar" src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Owner Avatar">
+                        <span id="lanyard-status-dot" class="status-dot offline"></span>
+                    </div>
+                    <div class="profile-info">
+                        <h4 id="lanyard-username">THEDEADLYPRO <i class="fa-solid fa-crown" style="color: #f59e0b; font-size: 0.9rem;"></i></h4>
+                        <p id="lanyard-activity">Click widget to reveal owner handle</p>
+                    </div>
+                </div>
+
+                <div id="reveal-container" class="reveal-box">
+                    <i class="fa-solid fa-pointer"></i> Click card to reveal Discord Handle: <strong>thede_adlypro</strong>
+                </div>
+
+                <div id="spotify-widget" class="spotify-box hidden">
+                    <i class="fa-brands fa-spotify"></i>
+                    <div class="spotify-info">
+                        <p style="color: var(--text-muted); font-size: 0.8rem;">Listening to Spotify</p>
+                        <p class="song" id="spotify-song">Track Title</p>
+                        <p id="spotify-artist" style="color: var(--text-muted); font-size: 0.8rem;">Artist</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast">Invite link copied to clipboard! ✨</div>
+
+    <script>
+        // Copy Invite Functionality
+        function copyInvite() {
+            navigator.clipboard.writeText("https://discord.gg/HmRBjExfSX");
+            showToast("Invite link copied to clipboard! ✨");
+        }
+
+        function showToast(msg) {
+            const toast = document.getElementById("toast");
+            toast.innerText = msg;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 3000);
+        }
+
+        // Toggle Rules Accordion
+        function toggleRule(element) {
+            element.classList.toggle("active");
+        }
+
+        // Click Widget to Reveal Owner Handle
+        let revealed = false;
+        function toggleOwnerUsername() {
+            const revealBox = document.getElementById("reveal-container");
+            if (!revealed) {
+                navigator.clipboard.writeText("thede_adlypro");
+                revealBox.innerHTML = `<i class="fa-solid fa-check"></i> Copied owner handle: <strong>thede_adlypro</strong>`;
+                revealBox.style.background = "rgba(34, 197, 94, 0.15)";
+                revealBox.style.borderColor = "rgba(34, 197, 94, 0.4)";
+                revealBox.style.color = "#4ade80";
+                showToast("Owner handle copied: thede_adlypro");
+                revealed = true;
+            } else {
+                revealBox.innerHTML = `<i class="fa-solid fa-pointer"></i> Discord Handle: <strong>thede_adlypro</strong>`;
+            }
+        }
+
+        // Starfield Canvas Animation
+        const canvas = document.getElementById("starfield");
+        const ctx = canvas.getContext("2d");
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resizeCanvas);
+        resizeCanvas();
+
+        for (let i = 0; i < 140; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 1.6,
+                alpha: Math.random(),
+                speed: Math.random() * 0.02 + 0.005
+            });
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.alpha += star.speed;
+                if (star.alpha > 1 || star.alpha < 0) star.speed = -star.speed;
+
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${Math.abs(star.alpha)})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        // Lanyard Real-Time Discord Presence
+        const DISCORD_ID = "1178346454201409566";
+
+        function initLanyard() {
+            const ws = new WebSocket("wss://api.lanyard.rest/socket");
+
+            ws.onopen = () => {
+                ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } }));
+            };
+
+            ws.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                if (data.t === "INIT_STATE" || data.t === "PRESENCE_UPDATE") {
+                    updateUI(data.d);
+                }
+            };
+
+            setInterval(() => {
+                if (ws.readyState === WebSocket.OPEN) {
+                    ws.send(JSON.stringify({ op: 3 }));
+                }
+            }, 30000);
+        }
+
+        function updateUI(data) {
+            if (!data) return;
+
+            // Status Dot
+            const statusDot = document.getElementById("lanyard-status-dot");
+            statusDot.className = `status-dot ${data.discord_status}`;
+
+            // Avatar & Username
+            if (data.discord_user) {
+                const avatar = `https://cdn.discordapp.com/avatars/${data.discord_user.id}/${data.discord_user.avatar}.png`;
+                document.getElementById("lanyard-avatar").src = avatar;
+            }
+
+            // Custom Status / Game
+            const activityText = document.getElementById("lanyard-activity");
+            if (data.activities && data.activities.length > 0) {
+                const custom = data.activities.find(a => a.type === 4);
+                const game = data.activities.find(a => a.type === 0);
+
+                if (game) {
+                    activityText.innerText = `Playing ${game.name}`;
+                } else if (custom && custom.state) {
+                    activityText.innerText = custom.state;
+                }
+            }
+
+            // Spotify
+            const spotifyBox = document.getElementById("spotify-widget");
+            if (data.listening_to_spotify && data.spotify) {
+                spotifyBox.classList.remove("hidden");
+                document.getElementById("spotify-song").innerText = data.spotify.song;
+                document.getElementById("spotify-artist").innerText = `by ${data.spotify.artist}`;
+            } else {
+                spotifyBox.classList.add("hidden");
+            }
+        }
+
+        initLanyard();
+    </script>
+</body>
+</html>
